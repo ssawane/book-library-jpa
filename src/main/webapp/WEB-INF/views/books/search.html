@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search book</title>
+</head>
+<body>
+<form method="GET" th:action="@{/books/search}">
+    <label for="title_part">Enter title part: </label>
+    <input type="text" id="title_part" name="title_part"/>
+    <br>
+    <input type="submit" value="Search!"/>
+    <br/>
+</form>
+<div th:if="${books}">
+    <hr/>
+    <div th:if="${books.isEmpty()}">
+        <p>No books with such title</p>
+    </div>
+    <p th:th:unless="${books.isEmpty()}">Books found: <p/>
+    <div th:each="book : ${books}" th:unless="${books.isEmpty()}">
+        <a th:href="@{/books/{id}(id=${book.getId()})}"
+           th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYearOfProduction()}">book</a>
+        <br/>
+        <i th:if="${book.getOwner()}" th:text="'Curently this book at :  '"/>
+        <a th:if="${book.getOwner()}" th:href="@{/people/{id}(id=${book.getOwner().getId()})}" th:text="${book.getOwner().getName()}"></a>
+        <i th:unless="${book.getOwner()}">Currently this book at the library</i>
+        <br/>
+        <br/>
+    </div>
+</div>
+<hr/>
+</body>
+<footer>
+    <a href="/people/">People list</a>
+    <br/>
+    <a href="/books/">Books list</a>
+    <br/>
+    <a href="/books/search">Search a book</a>
+</footer>
+</html>

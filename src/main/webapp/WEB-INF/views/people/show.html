@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Person page</title>
+</head>
+<body>
+<p th:text="${person.getName() + ', ' + person.getAge() + ', ' + person.getEmail()}">VALUE</p>
+
+<div th:if="${books.isEmpty()}">
+    <p>This user has no any book in rent<p/>
+</div>
+<div th:unless="${books.isEmpty()}">
+    <p>This user currently has books on rent:<p/>
+    <div th:each="book : ${books}">
+        <a th:style="${book.isOverdue() == true ? 'color:red' : 'color:green'}" th:href="@{/books/{id}(id=${book.getId()})}"
+                th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYearOfProduction()}"></a>
+    </div>
+</div>
+<br>
+<form th:method="GET" th:action="@{/people/{id}/edit(id=${person.getId()})}">
+    <input type="submit" value="Edit"/>
+</form>
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+  <input type="submit" value="Delete">
+</form>
+<br/>
+<hr/>
+</body>
+<footer>
+    <a href="/people/">People list</a>
+    <br/>
+    <a href="/books/">Books list</a>
+    <br/>
+    <a href="/books/search">Search a book</a>
+</footer>
+</html>

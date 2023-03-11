@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All people</title>
+</head>
+<body>
+<p>People list: </p>
+<div th:each="person : ${people}">
+    <a th:href="@{/people/{id}(id=${person.getId()})}"
+    th:text="${person.getName() + ', ' + person.getAge()}">person</a>
+</div>
+
+<br/>
+<hr/>
+<a href="/people/new">Create new person</a>
+<br/>
+<hr/>
+</body>
+<footer>
+    <a href="/people/">People list</a>
+    <br/>
+    <a href="/books/">Books list</a>
+    <br/>
+    <a href="/books/search">Search a book</a>
+</footer>
+</html>

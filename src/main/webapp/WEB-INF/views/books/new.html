@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New book</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/books}" th:object="${book}">
+    <label for="title">Enter title: </label>
+    <input type="text" th:field="*{title}" id="title"/>
+    <div style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+    <br>
+    <label for="author">Enter book's author: </label>
+    <input type="text" th:field="*{author}" id="author"/>
+    <div style="color: red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></div>
+    <br>
+    <label for="yearOfProduction">Enter book's year: </label>
+    <input type="text" th:field="*{yearOfProduction}" id="yearOfProduction"/>
+    <div style="color: red" th:if="${#fields.hasErrors('yearOfProduction')}" th:errors="*{yearOfProduction}"></div>
+    <br>
+    <input type="submit" value="Create!"/>
+    <br>
+</form>
+<hr/>
+</body>
+<footer>
+    <a href="/people/">People list</a>
+    <br/>
+    <a href="/books/">Books list</a>
+    <br/>
+    <a href="/books/search">Search a book</a>
+</footer>
+</html>
